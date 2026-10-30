@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mealcarta | Green Hero</title>
+    <meta name="description" content="mealcarta offers curated hospitality experiences that connect passionate hosts with community-minded attendees.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3e362e;
+            --secondary: #000000;
+            --dark: #3e362e;
+            --light: #000000;
+            --accent: #ffd166;
+            --text: #333333;
+            --other: #fffdd0;
+            --some: #ffffff;
+            --card-bg: #1a1a1a;
+            --hero-green: #4a7c3f;
+            --hero-green-deep: #2f5228;
+            --hero-green-light: #5c8f46;
+
+            --card-w: 260px;
+            --card-h: 340px;
+            --ring-radius: 300px;
+            --ring-stage-pad: 94px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            margin: 0;
+            padding-top: 0 !important;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* ===== SLIM NAV — 22px, green, no brand, no border ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--hero-green);
+            z-index: 1000;
+            border-bottom: none;
+            padding: 0;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: visible;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Everything hugs the RIGHT edge */
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;   /* <-- right aligned */
+            height: 100%;
+        }
+
+        /* Hamburger sits on the right too */
+        #menu-toggle {
+            display: none;
+            margin-left: 0.5rem;
+            margin-right: 0;
+            font-size: 0.9rem;
+            line-height: 1;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        #nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.8rem;
+            line-height: 1;
+            display: block;
+        }
+
+        #nav-links a:hover { color: var(--accent); }
+
+        #nav-links .nav-cta {
+            background-color: var(--accent);
+            color: var(--primary);
+            padding: 0.1rem 0.6rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        /* Dropdown opens from the RIGHT, left-aligned text inside */
+        #nav-links.open {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;      /* <-- left-align items inside */
+            position: absolute;
+            top: 22px;
+            right: 1rem;                  /* <-- anchored right */
+            left: auto;
+            padding: 1rem;
+            background: var(--hero-green);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            gap: 1rem;
+            z-index: 999;
+            text-align: left;             /* <-- left-align text */
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-primary:hover {
+            background-color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        /* ===== HERO SECTION — FOLIAGE GREEN ===== */
+        .hero-body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--hero-green);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        section.hero {
+            position: relative;
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+            background:
+                radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.12), transparent 55%),
+                radial-gradient(circle at 12% 85%, rgba(0, 0, 0, 0.22), transparent 60%),
+                linear-gradient(160deg, var(--hero-green) 0%, var(--hero-green) 18%, var(--hero-green-deep) 100%);
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 100%;
+            margin: 0 auto;
+            min-height: auto;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+
+        .hero-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-left: 5%;
+        }
+
+        .hero-column:nth-child(1) {
+            margin-top: 0;
+            width: 55%;
+            position: relative;
+            margin-left: 5%;
+            padding: 0 20px 40px;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        .hero-column:nth-child(2) {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 0;
+            margin-left: 0;
+            background: transparent;
+            position: relative;
+        }
+
+        .hero-lady {
+            width: 100%;
+            max-width: 720px;
+            height: auto;
+            object-fit: contain;
+            object-position: bottom center;
+            background: transparent;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.35));
+            animation: floatLady 6s ease-in-out infinite;
+            image-rendering: -webkit-optimize-contrast;
+            will-change: transform;
+            pointer-events: none;
+            margin-top: 420px;
+        }
+
+        @keyframes floatLady {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-12px); }
+        }
+
+        .headline-right {
+            color: #fff;
+            background-color: #1e3d1c;
+            padding: 12px 28px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            align-self: flex-end;
+            margin-right: 5%;
+            margin-top: 0;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-text {
+            font-size: 4.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        .hero-paragraph {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero-column h5 { display: none; }
+
+        .hero-top-left-image,
+        .hero-smiling-person,
+        .img-info,
+        .sign-text,
+        .hero-column-two-image {
+            display: none !important;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+            margin-left: 5%;
+            padding: 0 20px 16px 20px;
+        }
+
+        @media (max-width: 992px) {
+            .hero-text { font-size: 3rem; }
+            .hero-lady { max-width: 500px; margin-top: 300px; }
+            .headline-right { font-size: 1.3rem; padding: 10px 22px; }
+        }
+
+        @media (max-width: 768px) {
+            #menu-toggle { display: block; }
+            #nav-links { display: none; }
+
+            .container { flex-direction: column-reverse; }
+
+            .hero-text {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+                color: #ffffff;
+                font-weight: bold;
+            }
+
+            .hero-paragraph {
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
+                color: #fff;
+            }
+
+            .hero-column:nth-child(1),
+            .hero-column:nth-child(2) {
+                width: 100%;
+                margin-left: 0;
+                padding: 5px 20px;
+            }
+
+            .hero-column:nth-child(1) { order: 1; }
+
+            .hero-column:nth-child(2) {
+                order: 2;
+                padding: 5px 20px 30px;
+                align-items: center;
+            }
+
+            .hero-lady {
+                max-width: 340px;
+                margin: 0 auto;
+                margin-top: 30px;
+            }
+
+            .headline-right {
+                font-size: 1.1rem;
+                padding: 8px 18px;
+                align-self: center;
+                margin-right: 0;
+                margin-bottom: 0;
+                margin-top: 0;
+            }
+
+            .hero-btns {
+                margin-left: 0;
+                padding: 0 20px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-lady { max-width: 260px; }
+            .headline-right { font-size: 0.95rem; padding: 6px 14px; }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .hero-btns .btn {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        /* ===== ROTATING CARDS ===== */
+        .rotating-cards {
+            position: relative;
+            padding: 0 0 60px;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(74, 124, 63, 0.35) 0%, transparent 60%),
+                #000000;
+            overflow: hidden;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .ring-stage {
+            position: relative;
+            height: calc(var(--card-h) + var(--ring-stage-pad));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1400px;
+            perspective-origin: 50% 50%;
+        }
+
+        .ring-stage::before {
+            content: '';
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 620px;
+            max-width: 90vw;
+            height: 100px;
+            background: radial-gradient(ellipse at center, rgba(255, 209, 102, 0.22), transparent 70%);
+            filter: blur(14px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card-ring {
+            position: relative;
+            width: var(--card-w);
+            height: var(--card-h);
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            animation: ringSpin 26s linear infinite;
+            will-change: transform;
+            z-index: 1;
+        }
+
+        .ring-stage:hover .card-ring,
+        .ring-stage:focus-within .card-ring {
+            animation-play-state: paused;
+        }
+
+        @keyframes ringSpin {
+            from { transform: rotateY(0deg); }
+            to   { transform: rotateY(360deg); }
+        }
+
+        .rot-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: var(--card-w);
+            height: var(--card-h);
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #10261a;
+            border: 1px solid rgba(255, 209, 102, 0.28);
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: rotateY(calc(var(--i) * 60deg)) translateZ(var(--ring-radius));
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .rot-card img {
+            width: 100%;
+            height: 58%;
+            object-fit: cover;
+            display: block;
+            flex: 0 0 58%;
+            filter: saturate(1.05);
+        }
+
+        .rot-card-body {
+            padding: 14px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .rot-card-body h3 { font-size: 1.05rem; color: var(--accent); line-height: 1.25; }
+        .rot-card-body p { font-size: 0.8rem; color: #cfd8cc; line-height: 1.45; }
+
+        .rot-card-tag {
+            margin-top: auto;
+            font-size: 0.68rem;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: #8fbb85;
+            font-weight: 600;
+        }
+
+        .ring-hint {
+            text-align: center;
+            color: #7f8f79;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --card-w: 195px;
+                --card-h: 265px;
+                --ring-radius: 220px;
+                --ring-stage-pad: 78px;
+            }
+            .rotating-cards { padding: 0 0 45px; border-radius: 28px 28px 0 0; }
+            .ring-stage { perspective: 1000px; }
+            .rot-card-body { padding: 10px 12px 12px; }
+            .rot-card-body h3 { font-size: 0.92rem; }
+            .rot-card-body p { font-size: 0.72rem; }
+        }
+
+        @media (max-width: 420px) {
+            :root {
+                --card-w: 165px;
+                --card-h: 230px;
+                --ring-radius: 185px;
+                --ring-stage-pad: 56px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card-ring { animation: none; transform: rotateY(-20deg); }
+            .hero-lady { animation: none; }
+        }
+
+        /* ===== CAROUSEL — kept as is, not used ===== */
+        .hero-carousel {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 700px;
+            height: 500px;
+            perspective: 2000px;
+            z-index: 1;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            top: 7.5%;
+            left: 7.5%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1),
+                        opacity 0.8s ease,
+                        z-index 0.8s ease;
+        }
+
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .carousel-item.prev { transform: translateX(-75%) scale(0.8); opacity: 0.7; z-index: 1; }
+        .carousel-item.next { transform: translateX(75%) scale(0.8); opacity: 0.7; z-index: 1; }
+        .carousel-item.active {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 2;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active { background-color: var(--accent); transform: scale(1.2); }
+
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .carousel-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-arrow:hover { background-color: var(--accent); color: var(--primary); }
+
+        /* Clients */
+        .clients { padding: 60px 0; background-color: var(--light); }
+
+        .section-title { text-align: center; margin-bottom: 50px; position: relative; }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .client-logo { height: 60px; opacity: 0.7; transition: opacity 0.3s ease, transform 0.3s ease; }
+        .client-logo:hover { opacity: 1; transform: translateY(-5px); }
+
+        /* What We Do */
+        .what-we-do { padding: 100px 0; background: #1a1a1a; }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border: 1px solid #333;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent);
+            background-color: rgba(255, 209, 102, 0.1);
+        }
+
+        .service-content { padding: 30px; }
+        .service-content h3 { margin-bottom: 15px; color: var(--accent); }
+        .service-content p { color: #ddd; }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--dark);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 C50,100 50,0 100,100 L100,0 Z" fill="rgba(255,107,107,0.05)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .how-it-works .section-title h2 { color: var(--accent); }
+
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px 30px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .step-card h3 { margin-bottom: 20px; font-size: 1.5rem; color: #fff; }
+        .step-card p { color: #ddd; }
+
+        /* Why Us */
+        .why-us { padding: 100px 0; background-color: #000000; }
+
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 40px 25px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .advantage-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .advantage-icon { font-size: 3rem; color: var(--accent); margin-bottom: 25px; }
+        .advantage-card h3 { color: var(--accent); margin-bottom: 15px; }
+        .advantage-card p { color: #ddd; }
+
+        /* CTA */
+        .cta {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)" /></svg>');
+            background-size: 80%;
+            background-position: center;
+            opacity: 0.3;
+        }
+
+        .cta h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .cta p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; opacity: 0.9; }
+
+        .cta-btns { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
+
+        .btn-light { background-color: var(--accent); color: var(--primary); }
+        .btn-light:hover {
+            background-color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline-light { background-color: transparent; border: 2px solid white; color: white; }
+        .btn-outline-light:hover {
+            background-color: var(--light);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer { background-color: var(--dark); color: rgba(255, 255, 255, 0.7); padding: 70px 0 30px; }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-about p { margin-bottom: 20px; color: #ddd; }
+
+        .social-links { display: flex; gap: 15px; }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: var(--accent); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Extra responsive */
+        @media (max-width: 992px) {
+            .hero { padding: 40px 0; }
+            .hero-content { max-width: 100%; text-align: center; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { margin: 0 auto 30px; }
+            .hero-btns { justify-content: center; }
+            .hero-carousel {
+                position: relative;
+                width: 80%;
+                margin: 50px auto 0;
+                transform: none;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.4rem; }
+            .hero-btns { flex-direction: column; gap: 15px; }
+            .btn { width: 100%; text-align: center; }
+            .cta-btns { flex-direction: column; align-items: center; }
+            .btn { width: auto; }
+            .hero-carousel { height: 350px; }
+        }
+
+        @media (max-width: 576px) {
+            .hero { padding: 20px 0; }
+            .hero h1 { font-size: 2rem; }
+            .section-title h2 { font-size: 2rem; }
+            .cta h2 { font-size: 2.2rem; }
+            .hero-carousel { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== NAV (22px, green, no brand, no border) ===== -->
+    <nav id="navbar">
+        <div class="nav-container">
+
+            <!-- Hamburger (mobile only) — RIGHT -->
+            <button onclick="toggleMenu()" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Menu — RIGHT -->
+            <ul id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="nav-cta">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section — foliage green -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-column">
+                <p class="hero-text"> Data+ </p>
+                <p class="hero-paragraph">At meal Carta we articulate the right environment with the right data .</p>
+            </div>
+
+            <div class="hero-column">
+                <div class="headline-right"> mealcarta </div>
+                <img src="https://i.ibb.co/1Y0bbvLp/360-F-1215496106-e5-Yof-F2p-WZTA6-Dxq-TEPzg2k-BCRZUp8q1-removebg-preview-removebg-preview.png"
+                     alt="Smiling woman with transparent background"
+                     class="hero-lady"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+        </div>
+
+        <div class="hero-btns">
+            <a href="case-studies.html" class="btn btn-primary">Explore Experiences</a>
+            <a href="solutions.html" class="btn btn-secondary">Become a Host</a>
+        </div>
+    </section>
+
+    <!-- Rotating cards -->
+    <section class="rotating-cards" aria-label="Featured experiences">
+        <div class="ring-stage">
+            <div class="card-ring">
+
+                <article class="rot-card" style="--i:0">
+                    <img src="https://picsum.photos/seed/mealcarta-farm/600/420" alt="Long farm table set outdoors" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3>Farm Tables</h3>
+                        <p>Long-table dinners sourced from growers within twenty miles.</p>
+                        <span class="rot-card-tag">Seasonal &middot; Outdoor</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:1">
+                    <img src="https://picsum.photos/seed/mealcarta-rooftop/600/420" alt="Rooftop dinner at dusk" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3>Rooftop Suppers</h3>
+                        <p>Skyline views, small plates and conversations that run late.</p>
+                        <span class="rot-card-tag">City &middot; Evening</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:2">
+                    <img src="https://picsum.photos/seed/mealcarta-kitchen/600/420" alt="Hands cooking in a shared kitchen" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3>Kitchen Labs</h3>
+                        <p>Hands-on cooking sessions led by hosts who love to teach.</p>
+                        <span class="rot-card-tag">Workshop &middot; Hands-on</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:3">
+                    <img src="https://picsum.photos/seed/mealcarta-orchard/600/420" alt="Picnic under orchard trees" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3>Orchard Picnics</h3>
+                        <p>Blankets, baskets and slow afternoons under the trees.</p>
+                        <span class="rot-card-tag">Daylight &middot; Family</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:4">
+                    <img src="https://picsum.photos/seed/mealcarta-chef/600/420" alt="Chef plating a dish at the counter" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3>Chef's Counter</h3>
+                        <p>Front-row seats to a tasting menu built around your table.</p>
+                        <span class="rot-card-tag">Intimate &middot; Tasting</span>
+                    </div>
+                </article>
+
+                <article class="rot-card" style="--i:5">
+                    <img src="https://picsum.photos/seed/mealcarta-brunch/600/420" alt="Community brunch spread" loading="lazy">
+                    <div class="rot-card-body">
+                        <h3>Community Brunch</h3>
+                        <p>Weekend gatherings that turn neighbours into regulars.</p>
+                        <span class="rot-card-tag">Weekend &middot; Social</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients -->
+    <section class="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2> Portfolio-What we focus on </h2>
+            </div>
+            <div class="service-content">
+                <p>We are mealcarta;a digital registry  connecting people and businesses  through ideas shared at  dinner in  spaces you will love. Our clients include schools,factories,banks andcso on.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Do -->
+    <section class="what-we-do">
+        <div class="container">
+            <div class="section-title">
+                <h2>What We Offer</h2>
+            </div>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="service-content">
+                        <h3>Curated Experiences</h3>
+                        <p>We carefully select and vet hosts to ensure high-quality, memorable experiences that bring people together in meaningful ways.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-users"></i></div>
+                    <div class="service-content">
+                        <h3>Community Building</h3>
+                        <p>Our algorithm connects like-minded individuals to foster genuine relationships and build vibrant local communities.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="service-content">
+                        <h3>Secure Platform</h3>
+                        <p>We provide a safe, reliable platform for hosts and attendees with secure payments and verified profiles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+            </div>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Discover Experiences</h3>
+                    <p>Browse our curated selection of gatherings in your area - from cooking classes to nature hikes and game nights.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Book Your Spot</h3>
+                    <p>Reserve your place with our secure booking system. Receive all details and preparation instructions.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Connect & Enjoy</h3>
+                    <p>Attend the event, meet like-minded people, and create meaningful connections in a welcoming environment.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Become a Host</h3>
+                    <p>Share your passion! Apply to host your own events and build your community following.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose mealcarta</h2>
+            </div>
+            <div class="advantages">
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Authentic Connections</h3>
+                    <p>Our matching algorithm ensures you meet people who share your interests and values.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-star"></i></div>
+                    <h3>Quality Experiences</h3>
+                    <p>Every host is vetted to ensure exceptional, memorable gatherings.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Safe & Secure</h3>
+                    <p>Verified profiles and secure payments give you peace of mind.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-users"></i></div>
+                    <h3>Community Focus</h3>
+                    <p>We're building networks that extend beyond single events.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Join Our Community?</h2>
+            <p>Discover unique experiences in your area or start hosting your own gatherings. Join thousands of community builders on UPTOPIA.</p>
+            <div class="cta-btns">
+                <a href="#" class="btn btn-light">Find Experiences</a>
+                <a href="#" class="btn btn-outline-light">Become a Host</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="margin: 20px auto; max-width: 1200px; text-align: center;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 30px;">
+                <div class="footer-column" style="margin: 15px; min-width: 200px;">
+                    <h3>Mealcarta Solutions</h3>
+                    <p style="margin: 15px 0;">Creating innovative solutions that bridge communities and technology for sustainable impact.</p>
+                </div>
+
+                <div class="footer-column" style="margin: 15px; min-width: 200px;">
+                    <h3>Values</h3>
+                    <ul class="contact-info" style="list-style: none; padding: 0; margin: 15px 0;">
+                        <li style="margin: 8px 0;"><span>Teamwork</span></li>
+                        <li style="margin: 8px 0;"><span>Innovation</span></li>
+                        <li style="margin: 8px 0;"><span>Reliability</span></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column" style="margin: 15px; min-width: 200px;">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links" style="list-style: none; padding: 0; margin: 15px 0;">
+                        <li style="margin: 8px 0;"><a href="index.html">Home</a></li>
+                        <li style="margin: 8px 0;"><a href="solutions.html">Solutions</a></li>
+                        <li style="margin: 8px 0;"><a href="case-studies.html">Case-studies</a></li>
+                        <li style="margin: 8px 0;"><a href="about.html">About</a></li>
+                        <li style="margin: 8px 0;"><a href="#">contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column" style="margin: 15px; min-width: 200px;">
+                    <h3>legal</h3>
+                    <ul class="footer-links" style="list-style: none; padding: 0; margin: 15px 0;">
+                        <li style="margin: 8px 0;"><a href="legal.html#privacy">Privacy Policy</a></li>
+                        <li style="margin: 8px 0;"><a href="legal.html#terms">Terms of Service</a></li>
+                        <li style="margin: 8px 0;"><a href="legal.html#cookie">Cookie Policy</a></li>
+                        <li style="margin: 8px 0;"><a href="legal.html#accessibility">Accessibility</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column" style="margin: 15px; min-width: 200px;">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info" style="list-style: none; padding: 0; margin: 15px 0;">
+                        <li style="margin: 8px 0;"><i class="fas fa-map-marker-alt"></i> <span>Remote Worldwide</span></li>
+                        <li style="margin: 8px 0;"><i class="fas fa-phone"></i> <span>COMING - SOON</span></li>
+                        <li style="margin: 8px 0;"><i class="fas fa-envelope"></i> <span>apacheremembers982@gmail.com</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright" style="margin-top: 30px; text-align: center;">
+                <p style="margin: 10px 0;">&copy; Mealcarta.com, all rights reserved.</p>
+                <p style="margin: 10px 0;">A hospitality and digital services company</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle menu for mobile — all positioning handled in CSS
+        function toggleMenu() {
+            const links = document.getElementById('nav-links');
+            const toggle = document.getElementById('menu-toggle');
+            const isOpen = links.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+
+        // Close the dropdown if the viewport grows past mobile
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                document.getElementById('nav-links').classList.remove('open');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('load', handleResize);
+
+        // Card scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = { threshold: 0.1 };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(card);
+            });
+
+            document.querySelectorAll('.step-card').forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s";
+                observer.observe(card);
+            });
+
+            document.querySelectorAll('.advantage-card').forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+  </html>

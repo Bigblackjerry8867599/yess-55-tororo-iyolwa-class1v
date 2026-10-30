@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case  Studies |  - Community-Driven Experiences</title>
+    <meta name="description" content="Discover how UPTOPIA is transforming communities through curated experiences and meaningful connections.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #483C32;
+            --secondary: #4ecdc4;
+            --dark:  #ff6b6b;
+            --light: #000000;
+            --accent: #ffd166;
+            --text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* ===== Header & Navigation ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            /* SAME background treatment as the hero */
+            background-color: #8B9A6E;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+                url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center 55%;
+            background-repeat: no-repeat;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 3px 0;                /* was ~1rem → ~70% shorter masthead */
+            transition: padding 0.3s ease;
+        }
+
+        .navbar.scrolled { padding: 2px 0; }
+
+        .nav-inner {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;            /* anchor for the mobile dropdown */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            min-height: 26px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logo i { font-size: 0.85rem; color: #ffffff; margin-right: 0; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 0 0 0 auto;            /* pushes the whole menu to the RIGHT */
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-links li { margin: 0; }
+
+        .nav-links a {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: 0.3px;
+            padding: 4px 2px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .nav-links a:hover { opacity: 0.7; color: #ffffff; }
+        .nav-links a::after { display: none; }   /* remove old underline effect */
+
+        .nav-links a.nav-cta {
+            background-color: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links a.nav-cta:hover { opacity: 1; }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: 0;
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1;
+            padding: 2px 4px;
+            cursor: pointer;
+        }
+
+        /* Mobile: small dropdown that hugs the text */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                position: absolute;
+                top: calc(100% + 4px);
+                right: 0;                  /* hugs the right edge of the site */
+                width: max-content;        /* wraps around the dropdown text only */
+                padding: 6px 10px;
+                background-color: rgba(0, 0, 0, 0.88);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 6px;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+                z-index: 999;
+            }
+
+            .nav-links.open { display: flex; }
+
+            .nav-links a {
+                padding: 5px 2px;
+                font-size: 0.78rem;
+                white-space: nowrap;
+            }
+
+            .nav-links a.nav-cta {
+                margin-top: 4px;
+                padding: 4px 8px;
+            }
+        }
+
+        /* Shared layout + button utilities (used throughout the page) */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--light);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--light);
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+/* ===== HERO SECTION ===== */
+.hero-body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #8B9A6E;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+section.hero {
+    position: relative;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    min-height: 900px;
+    overflow: hidden;
+
+    /* Fallback colour while the image loads */
+    background-color: #8B9A6E;
+
+    /* Image + dark overlay for text legibility */
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=80');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.hero-container {
+    max-width: 100%;
+    margin: 0 auto;
+    min-height: auto;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.hero-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    margin-left: 5%;
+}
+
+/* Left column - text */
+.hero-column:nth-child(1) {
+    margin-top: 0;
+    width: 55%;
+    position: relative;
+    margin-left: 5%;
+    /* Top padding leaves room for the rotating circular badge above */
+    padding: 250px 20px 40px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* Right column - badge at top, image absolutely positioned near bottom */
+.hero-column:nth-child(2) {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    margin-left: 0;
+    background: transparent;
+    position: relative;
+    min-height: 800px;
+}
+
+/* ===== ROTATING CIRCULAR TEXT (top-left quarter of the hero) ===== */
+.hero-circle {
+    position: absolute;
+    top: 30px;
+    left: 3%;
+    width: 190px;
+    height: 190px;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.hero-circle svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transform-origin: 50% 50%;
+    animation: heroCircleSpin 26s linear infinite;
+}
+
+@keyframes heroCircleSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* Text is a different colour from the figure (teal vs. stone) */
+.hero-circle-text {
+    fill: #7FE3D6;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-circle svg { animation: none; }
+}
+
+/* ===== LADY WITH TRANSPARENT BACKGROUND ===== */
+.hero-lady {
+    position: absolute;
+    top: 480px;
+    right: 0;
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    object-fit: contain;
+    object-position: bottom center;
+    background: transparent;
+    display: block;
+    filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.28));
+    image-rendering: -webkit-optimize-contrast;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Headline badge on the RIGHT side of the hero */
+.headline-right {
+    color: #fff;
+    background-color: rgb(3, 3, 94);
+    padding: 12px 28px;
+    border-radius: 50px;
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    align-self: flex-end;
+    margin-right: 5%;
+    margin-top: 0;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.headline-right::before,
+.headline-right::after {
+    content: '\2022';
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0 8px;
+    opacity: 0.9;
+}
+
+/* Hero text (left side) */
+.hero-text {
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.hero-paragraph {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.order-button {
+    background-color: rgb(3, 3, 94);
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-button:hover {
+    background-color: #c87f0a;
+}
+
+.hero-column h5 {
+    display: none;
+}
+
+.hero-top-left-image,
+.hero-smiling-person,
+.img-info,
+.sign-text,
+.hero-column-two-image {
+    display: none !important;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    margin-left: 5%;
+    padding: 0 20px 40px 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    section.hero {
+        min-height: 750px;
+    }
+    .hero-text {
+        font-size: 3rem;
+    }
+    .hero-column:nth-child(1) {
+        padding-top: 215px;
+    }
+    .hero-column:nth-child(2) {
+        min-height: 650px;
+    }
+    .hero-circle {
+        width: 170px;
+        height: 170px;
+        top: 24px;
+    }
+    .hero-lady {
+        max-width: 500px;
+        top: 380px;
+    }
+    .headline-right {
+        font-size: 1.3rem;
+        padding: 10px 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    section.hero {
+        min-height: auto;
+        padding-bottom: 30px;
+
+        /* Smaller file + tighter crop for phones */
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80');
+        background-position: center top;
+    }
+
+    .hero-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Circular badge drops into normal flow, centred above the text */
+    .hero-circle {
+        position: static;
+        width: 150px;
+        height: 150px;
+        margin: 22px auto 0;
+    }
+
+    .hero-text {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .hero-paragraph {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        color: #fff;
+    }
+
+    /* Left column (text) comes first */
+    .hero-column:nth-child(1) {
+        order: 1;
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 20px;
+    }
+
+    /* Right column (badge + image) comes second */
+    .hero-column:nth-child(2) {
+        order: 2;
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 20px 0;
+        align-items: center;
+        min-height: auto;
+    }
+
+    /* Image returns to normal flow, below badge */
+    .hero-lady {
+        position: static;
+        top: auto;
+        right: auto;
+        max-width: 340px;
+        margin: 30px auto 0;
+        order: 2;
+    }
+
+    /* Badge above the image */
+    .headline-right {
+        font-size: 1.1rem;
+        padding: 8px 18px;
+        align-self: center;
+        margin-right: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+        order: 1;
+    }
+
+    .headline-right::before,
+    .headline-right::after {
+        font-size: 1.1rem;
+        margin: 0 4px;
+    }
+
+    .hero-btns {
+        margin-left: 0;
+        padding: 0 20px 30px;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-circle {
+        width: 130px;
+        height: 130px;
+    }
+    .hero-lady {
+        max-width: 260px;
+    }
+    .headline-right {
+        font-size: 0.95rem;
+        padding: 6px 14px;
+    }
+}
+
+
+
+
+        
+        /* Case Study Filters */
+        .case-filters {
+            padding: 60px 0 40px;
+            background-color: var(--light);
+            color: #ffffff;
+        }
+        
+        .filters-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-btn {
+            padding: 10px 25px;
+            border-radius: 30px;
+            background-color: var(--light);
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--light);
+            color: white;
+        }
+        
+        /* Case Studies Grid */
+        .case-studies {
+            padding: 40px 0 100px;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--light);
+            border-radius: 2px;
+        }
+        
+        .studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .case-card {
+            background-color: var(--primary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+        }
+        
+        .case-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .case-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .case-card:hover .case-image img {
+            transform: scale(1.05);
+        }
+        
+        .case-content {
+            padding: 30px;
+        }
+        
+        .case-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background-color: var(--light);
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .case-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .case-stats {
+            display: flex;
+            gap: 20px;
+            margin: 25px 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+        
+        /* Featured Case Study */
+        .featured-case {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .featured-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background-color: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--light);
+        }
+        
+        .featured-image {
+            flex: 1;
+            height: 500px;
+        }
+        
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .featured-content {
+            flex: 1;
+            padding: 50px;
+        }
+        
+        .featured-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background-color: var(--accent);
+            color: #ffffff;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .featured-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .featured-stat {
+            background-color: rgba(78, 205, 196, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .featured-stat .stat-number {
+            font-size: 2rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .testimonial-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background-color: var(--primary);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 5rem;
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 120px 0;
+            background: var(--light);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)" /></svg>');
+            background-size: 80%;
+            background-position: center;
+            opacity: 0.3;
+        }
+        
+        .cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn-light {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        
+        .btn-light:hover {
+            background-color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-outline-light {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: var(--light);
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: var(--light);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-heading {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .featured-container {
+                flex-direction: column;
+            }
+            
+            .featured-image {
+                width: 100%;
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hero-btns, .cta-btns {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .studies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 130px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+            
+            .testimonial-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <i class="fas fa-utensils"></i> MEALCARTA
+            </a>
+
+            <!-- Hamburger (mobile only) -->
+            <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()"
+                    aria-label="Toggle menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Menu — sits on the right -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="nav-cta">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- Toggle Script -->
+    <script>
+      function toggleMenu() {
+        const links  = document.getElementById('nav-links');
+        const toggle = document.getElementById('menu-toggle');
+        const open   = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+      }
+
+      // Close the dropdown when resizing back to desktop
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+          document.getElementById('nav-links').classList.remove('open');
+        }
+      });
+    </script>
+
+
+
+    <!-- Hero Section -->
+<section class="hero">
+
+    <!-- ===== ROTATING CIRCULAR TEXT — top-left quarter ===== -->
+    <div class="hero-circle" role="img" aria-label="Making spaces, connecting people">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+                <!-- Invisible circular path the text travels along -->
+                <path id="heroCirclePath"
+                      d="M 100,100 m -64,0 a 64,64 0 1,1 128,0 a 64,64 0 1,1 -128,0" />
+            </defs>
+
+            <!-- Outer ring (figure) -->
+            <circle cx="100" cy="100" r="80" fill="none"
+                    stroke="#EDE6D6" stroke-width="1" opacity="0.5" />
+
+            <!-- Dashed ring (figure) -->
+            <circle cx="100" cy="100" r="76" fill="none"
+                    stroke="#EDE6D6" stroke-width="1" opacity="0.22"
+                    stroke-dasharray="2 7" />
+
+            <!-- Central circular figure (not gold) -->
+            <circle cx="100" cy="100" r="38"
+                    fill="rgba(237, 230, 214, 0.10)"
+                    stroke="#EDE6D6" stroke-width="1.4" opacity="0.9" />
+            <circle cx="100" cy="100" r="4" fill="#EDE6D6" opacity="0.9" />
+
+            <!-- Rotating text (different colour from the figure) -->
+            <text class="hero-circle-text">
+                <textPath href="#heroCirclePath" startOffset="0">MAKING SPACES, CONNECTING PEOPLE •</textPath>
+            </text>
+        </svg>
+    </div>
+
+    <div class="hero-container">
+
+        <!-- LEFT: text -->
+        <div class="hero-column">
+            <p class="hero-text"> Exploring our incentives</p>
+            <p class="hero-paragraph">We Interrogate the relationship between several data points to create a universal knowledge portal that informs our cause-action philosophy.</p>
+        </div>
+
+        <!-- RIGHT: lady with transparent background + clinic badge -->
+    
+
+            
+        
+
+    </div>
+</section>
+
+    
+
+
+    
+
+    <!-- Case Studies Grid -->
+    <section class="case-studies" id="case-studies">
+        <div class="container">
+            <div class="section-title">
+                <h2>Coming-Soon</h2>
+                <p>Real stories of connection, growth, and community building</p>
+            </div>
+
+            <div class="studies-grid">
+
+                <!-- Card 1: Corporate gigs (now inside the grid) -->
+                <div class="case-card">
+                    <div class="case-content">
+                        <span class="case-tag"> Corporate gigs </span>
+                        <h3> How shared value propositions helped us work it out</h3>
+                        <p> We approach mr david lin who bought a couple of mealcards for his staff; together with him and several others, we helped bring several companies together in a networking mixer.</p>
+
+                        <div class="case-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">20+ </div>
+                                <div class="stat-label"> Mixers organized</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3.2K</div>
+                                <div class="stat-label">Participants</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Experiential learning -->
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Culinary Experience">
+                    </div>
+                    <div class="case-content">
+                        <span class="case-tag"> Experiental learning </span>
+                        <h3> A school of experiences </h3>
+                        <p>How we work with educators and students to teach values and create networks for good.</p>
+                        
+                        <div class="case-stats">
+                            <div class="stat-item">
+                                <div class="stat-number"> 10+</div>
+                                <div class="stat-label"> Schools Approached </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">98%</div>
+                                <div class="stat-label">Positive Reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Workshop -->
+                <div class="case-card">
+                    <div class="case-content">
+                        <span class="case-tag">Workshop</span>
+                        <h3>Art Workshops That Built a Creative Hub</h3>
+                        <p>An artist's journey from hosting small painting classes to creating a vibrant creative community that now supports local artists and hosts exhibitions.</p>
+                        
+                        <div class="case-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">85</div>
+                                <div class="stat-label">Local Artists</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Exhibitions</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.studies-grid -->
+        </div>
+    </section>
+
+    <!-- Featured Case Study -->
+    <section class="featured-case">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Success Story</h2>
+                <p>An in-depth look at one of our most impactful community transformations</p>
+            </div>
+            
+            <div class="featured-container">
+                <div class="featured-image">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Community Garden Project">
+                </div>
+                <div class="featured-content">
+                    <span class="featured-tag">Community Impact</span>
+                    <h3> Intergrated community spaces </h3>
+                    <p>We are actively seeking relationships and patnerships with community brands influencers and individuals as our hosts.Online we have approached a few people who help in executing our ideas.</p>
+                    <p>Through our platform, we help cordinate volunteers,business dinners andcall kinds of meetups uding our proven strategies.</p>
+                    
+                    <div class="featured-stats">
+                        <div class="featured-stat">
+                            <div class="stat-number">5K+</div>
+                            <div class="stat-label">Volunteer Hours</div>
+                        </div>
+                        <div class="featured-stat">
+                            <div class="stat-number">120+</div>
+                            <div class="stat-label">Community Events</div>
+                        </div>
+                        <div class="featured-stat">
+                            <div class="stat-number">3.2K+</div>
+                            <div class="stat-label">Inaugural Year Participants</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Testimonials -->
+<section class="testimonials">
+    <div class="container">
+        <div class="section-title">
+            <h2>Online Verticals</h2>
+            <p>How we facilitate our clients using digital tools; the hosts and attendees are saying something about their experiences</p>
+        </div>
+
+        <div class="testimonial-container">
+
+            <!-- Card 1 -->
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Hosting allowed me to turn my passion into a full-time career. The community I've built has become my extended family."</p>
+                </div>
+                <div class="testimonial-author">
+                    <h4>Sophia M</h4>
+                    <p>Culinary Host, Chicago</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"As a newcomer to the city, it helped me find my tribe. The hiking group I joined through the platform has become my closest friends."</p>
+                </div>
+                <div class="testimonial-author">
+                    <h4>Michael C</h4>
+                    <p>Software Engineer, Seattle</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"The platform's tools made it so easy to organize my art workshops. I've tripled my attendance since switching to the platform."</p>
+                </div>
+                <div class="testimonial-author">
+                    <h4>Emma R</h4>
+                    <p>Art Workshop Host, Austin</p>
+                </div>
+            </div>
+
+        </div><!-- /.testimonial-container -->
+    </div><!-- /.container -->
+</section>
+
+    
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Create Your Success Story?</h2>
+            <p>Join thousands of hosts building meaningful communities and attendees finding authentic connections.</p>
+            <div class="cta-btns">
+                <a href="#" class="btn btn-light">Become a Host</a>
+                <a href="#" class="btn btn-outline-light">Explore Experiences</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+
+
+<footer>
+
+<div style="margin: 20px auto; max-width: 1200px; text-align: center;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 30px;">
+        <div class="footer-column" style="margin: 15px; min-width: 200px;">
+            <h3>MEALCARTA Solutions</h3>
+            <p style="margin: 15px 0;">Creating innovative solutions that bridge communities and technology for sustainable impact.</p>
+            <div style="margin-top: 20px;"></div>
+        </div>
+        
+        <div class="footer-column" style="margin: 15px; min-width: 200px;">
+            <h3>Values</h3>
+            <ul class="contact-info" style="list-style: none; padding: 0; margin: 15px 0;">
+                <li style="margin: 8px 0;">
+                    <span>Teamwork</span>
+                </li>
+                <li style="margin: 8px 0;">
+                    <span>Innovation</span>
+                </li>
+                <li style="margin: 8px 0;">
+                    <span>Reliability</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="footer-column" style="margin: 15px; min-width: 200px;">
+            <h3>Quick Links</h3>
+            <ul class="footer-links" style="list-style: none; padding: 0; margin: 15px 0;">
+                <li style="margin: 8px 0;"><a href="index.html">Home</a></li>
+                <li style="margin: 8px 0;"><a href="solutions.html">Solutions</a></li>
+                <li style="margin: 8px 0;"><a href="case-studies.html">Case-studies</a></li>
+                <li style="margin: 8px 0;"><a href="about.html">About</a></li>
+                <li style="margin: 8px 0;"><a href="#">contact</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column" style="margin: 15px; min-width: 200px;">
+            <h3>legal</h3>
+            <ul class="footer-links" style="list-style: none; padding: 0; margin: 15px 0;">
+                <li style="margin: 8px 0;"><a href="legal.html#privacy">Privacy Policy</a></li>
+                <li style="margin: 8px 0;"><a href="legal.html#terms">Terms of Service</a></li>
+                <li style="margin: 8px 0;"><a href="legal.html#cookie">Cookie Policy</a></li>
+                <li style="margin: 8px 0;"><a href="legal.html#accessibility">Accessibility</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column" style="margin: 15px; min-width: 200px;">
+            <h3>Contact Us</h3>
+            <ul class="contact-info" style="list-style: none; padding: 0; margin: 15px 0;">
+                <li style="margin: 8px 0;">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Remote Worldwide</span>
+                </li>
+                <li style="margin: 8px 0;">
+                    <i class="fas fa-phone"></i>
+                    <span>COMING - SOON</span>
+                </li>
+                <li style="margin: 8px 0;">
+                    <i class="fas fa-envelope"></i>
+                    <span>apacheremembers982@gmail.com</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="copyright" style="margin-top: 30px; text-align: center;">
+        <p style="margin: 10px 0;">&copy; 2026 MEALCARTA , all rights reserved.</p>
+        <p style="margin: 10px 0;">A hospitality and digital services company</p>
+    </div>
+</div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (navbar) {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+            });
+
+            // Filter functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                });
+            });
+            
+            // Simple animation for cards on scroll
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, observerOptions);
+
+            // Animate case study cards
+            document.querySelectorAll('.case-card').forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(card);
+            });
+
+            // Animate featured case study
+            const featuredContainer = document.querySelector('.featured-container');
+            if (featuredContainer) {
+                featuredContainer.style.opacity = "0";
+                featuredContainer.style.transform = "translateY(20px)";
+                featuredContainer.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+                observer.observe(featuredContainer);
+            }
+
+            // Animate testimonial cards
+            document.querySelectorAll('.testimonial-card').forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s";
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+  </html>
